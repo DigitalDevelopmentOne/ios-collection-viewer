@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-final class DataSource<Content: View>: NSObject, UICollectionViewDataSource {
+final class DataSource<Content: View>: NSObject, UICollectionViewDataSource, Logging {
     init(data: [() -> Content]) {
         self.data = data
     }

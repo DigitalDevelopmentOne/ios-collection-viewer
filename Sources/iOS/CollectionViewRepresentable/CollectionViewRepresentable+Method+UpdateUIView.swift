@@ -13,7 +13,14 @@ import SwiftUI
 
 extension CollectionViewRepresentable {
     func updateUIView(_ uiView: UICollectionView, context: Context) {
-        let dataSource = DataSource(data: self.views)
+        
+        let dataSource: DataSource<Content>
+        if self.views.count > 50 {
+            dataSource = DataSource(data: self.views[0...50].map{$0})
+        } else {
+            dataSource = DataSource(data: self.views)
+        }
+        
         let prefetchDataSource = PrefetchDataSource<Content>()
         let delegate = Delegate<Content>()
         
@@ -31,7 +38,9 @@ extension CollectionViewRepresentable {
         uiView.delegate = delegate
         uiView.prefetchDataSource = prefetchDataSource
         uiView.register(Cell<Content>.self, forCellWithReuseIdentifier: "\(Cell<Content>.self)")
+        uiView.decelerationRate = .init(rawValue: 0.9987)
         uiView.showsVerticalScrollIndicator = false
+        print(uiView.decelerationRate)
  
     }
 }

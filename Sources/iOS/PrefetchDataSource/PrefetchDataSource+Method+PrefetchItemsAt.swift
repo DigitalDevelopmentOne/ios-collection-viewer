@@ -13,7 +13,5 @@ import SwiftUI
 
 extension PrefetchDataSource{
     @inlinable
-    func prefetchItemsAt(_ collectionView: UICollectionView, _ indexPaths: [IndexPath]) {
-        //
-    }
+    func prefetchItemsAt(_ collectionView: UICollectionView, _ indexPaths: [IndexPath]) {}
 }

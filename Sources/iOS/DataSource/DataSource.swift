@@ -1,7 +1,7 @@
 /*
  
  Project: CollectionViewer
- File: Coordinator.swift
+ File: DataSource.swift
  Created by: Egor Boyko
  Date: 06.09.2023
  
@@ -16,6 +16,7 @@ final class DataSource<Content: View>: NSObject, UICollectionViewDataSource {
         self.data = data
     }
     var data: [() -> Content]
+    var hostingStorage: [Int : UIHostingController<Content>] = [:]
     weak var coordinator: Coordinator<Content>?
     
     func collectionView(

@@ -13,7 +13,7 @@ import SwiftUI
 
 final class Delegate<Content: View>: NSObject, UICollectionViewDelegateFlowLayout{
     weak var coordinator: Coordinator<Content>?
-    
+    var sizeStorage: [Int: CGSize] = [:]
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,

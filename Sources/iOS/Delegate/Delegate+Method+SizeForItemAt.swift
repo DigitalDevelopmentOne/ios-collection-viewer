@@ -17,6 +17,9 @@ extension Delegate{
         _ collectionView: UICollectionView,
         _ collectionViewLayout: UICollectionViewLayout,
         _ indexPath: IndexPath) -> CGSize {
-            .zero
+            if let size = self.sizeStorage[indexPath.item] {
+                return size
+            }
+            
     }
 }

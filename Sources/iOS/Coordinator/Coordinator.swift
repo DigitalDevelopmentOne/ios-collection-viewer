@@ -12,5 +12,8 @@
 import SwiftUI
 
 final class Coordinator<Content: View> {
-
+    init(ownerSize: CGSize = .zero) {
+        self.ownerSize = ownerSize
+    }
+    var ownerSize: CGSize
 }

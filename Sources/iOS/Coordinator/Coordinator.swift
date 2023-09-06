@@ -12,8 +12,13 @@
 import SwiftUI
 
 final class Coordinator<Content: View> {
-    init(ownerSize: CGSize = .zero) {
+    init(inputData: [() -> Content] = [], ownerSize: CGSize = .zero) {
+        self.inputData = inputData
         self.ownerSize = ownerSize
     }
+    var inputData: [() -> Content]
     var ownerSize: CGSize
+    var dataSource: DataSource<Content>?
+    var delegate: Delegate<Content>?
+    var prefetchDataSource: PrefetchDataSource<Content>?
 }

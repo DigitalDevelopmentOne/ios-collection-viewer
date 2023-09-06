@@ -14,6 +14,7 @@ import SwiftUI
 extension DataSource{
     @inlinable
     func numberOfItemsInSection(_ collectionView: UICollectionView, _ section: Int) -> Int {
-        self.data.count
+        print("numberOfItemsInSection: \(self.data.count)")
+        return self.data.count
     }
 }

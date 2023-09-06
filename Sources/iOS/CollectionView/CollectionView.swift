@@ -11,8 +11,27 @@
 
 import SwiftUI
 
-public struct CollectionView<Content: View>: View {
-    public var body: some View {
-        Color.red
+public struct CollectionView<Collection: RandomAccessCollection, Content: View>: View {
+    init(views: [() ->Content]) {
+        self.views = views
     }
+    let views: [() -> Content]
+    public var body: some View {
+        GeometryReader{
+            CollectionViewRepresentable<Content>(views: self.views, ownerSize: $0.size)
+        }
+    }
+}
+
+extension CollectionView {
+    public init(
+        _ collection: Collection,
+        @ViewBuilder content: @escaping (
+            _ index: Collection.Index,
+            _ element: Collection.Element) -> Content){
+                let views = Array(zip(collection.indices, collection)).map { (index, element) in
+                    { content(index, element) }
+                }
+                self.init(views: views)
+            }
 }

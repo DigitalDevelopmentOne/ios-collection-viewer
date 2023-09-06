@@ -11,4 +11,7 @@
 
 import SwiftUI
 
-struct CollectionViewRepresentable<Content: View>: UIViewRepresentable {}
+struct CollectionViewRepresentable<Content: View>: UIViewRepresentable {
+    let views: [() -> Content]
+    let ownerSize: CGSize
+}

@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-final class Delegate<Content: View>: NSObject, UICollectionViewDelegateFlowLayout{
+final class Delegate<Content: View>: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     weak var coordinator: Coordinator<Content>?
     var sizeStorage: [Int: CGSize] = [:]
     func collectionView(

@@ -14,11 +14,9 @@ import SwiftUI
 final class Cell<Content: View>: UICollectionViewCell {
     var hosting: UIHostingController<Content>?
     
-    func setView(view: () -> Content, size: CGSize){
+    func setView(view: () -> Content, size: CGSize?){
         let hosting = UIHostingController(rootView: view())
-        let expectedSize = hosting.sizeThatFits(in: size)
-        hosting.view.backgroundColor = .clear
-        hosting.view.frame = .init(origin: .zero, size: expectedSize)
+        hosting.configure(size: size)
         setHosting(hosting: hosting)
     }
     
@@ -29,3 +27,4 @@ final class Cell<Content: View>: UICollectionViewCell {
         }
     }
 }
+

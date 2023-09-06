@@ -16,6 +16,21 @@ extension DataSource{
     func cellForItemAt(
         _ collectionView: UICollectionView,
         _ indexPath: IndexPath) -> UICollectionViewCell {
-            UICollectionViewCell()
+            guard let cell = collectionView
+                .dequeueReusableCell(
+                    withReuseIdentifier: "\(Cell<Content>.self)",
+                    for: indexPath
+                ) as? Cell<Content> else {
+                fatalError("Cell Retrieval")
+            }
+            
+            if let hosting = hostingStorage[indexPath.item] {
+                cell.setHosting(hosting: hosting)
+                return cell
+            }
+            
+            let content = self.data[indexPath.item]
+            cell.setView(view: content, size: self.coordinator?.ownerSize)
+            return cell
     }
 }

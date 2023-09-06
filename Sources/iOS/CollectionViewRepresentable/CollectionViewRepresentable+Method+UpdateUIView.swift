@@ -1,7 +1,7 @@
 /*
  
  Project: CollectionViewer
- File: CollectionViewRepresentable+Method+UpdateCoordinator.swift
+ File: CollectionViewRepresentable+Method+UpdateUIView.swift
  Created by: Egor Boyko
  Date: 06.09.2023
  
@@ -12,7 +12,7 @@
 import SwiftUI
 
 extension CollectionViewRepresentable {
-    func updateUIView(_ uiView: UIViewType, context: Context) {
+    func updateUIView(_ uiView: UICollectionView, context: Context) {
         //
     }
 }

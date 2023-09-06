@@ -12,7 +12,7 @@
 import SwiftUI
 
 extension CollectionViewRepresentable {
-    func makeUIView(context: Context) -> some UICollectionView {
+    func makeUIView(context: Context) -> UICollectionView {
         .init()
     }
 }

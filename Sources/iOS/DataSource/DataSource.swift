@@ -16,7 +16,6 @@ final class DataSource<Content: View>: NSObject, UICollectionViewDataSource {
         self.data = data
     }
     var data: [() -> Content]
-    var hostingStorage: [Int : UIHostingController<Content>] = [:]
     weak var coordinator: Coordinator<Content>?
     
     func collectionView(

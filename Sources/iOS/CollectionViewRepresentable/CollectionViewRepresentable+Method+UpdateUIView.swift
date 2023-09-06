@@ -14,6 +14,21 @@ import SwiftUI
 extension CollectionViewRepresentable {
     func updateUIView(_ uiView: UICollectionView, context: Context) {
         
+        if context.coordinator.inputData.count != self.views.count {
+            
+            if context.coordinator.inputData.count == context.coordinator.dataSource?.data.count {
+                context.coordinator.inputData = self.views
+                context.coordinator.dataSource?.update(uiView)
+            } else {
+                context.coordinator.inputData = self.views
+            }
+        }
+        
+        guard context.coordinator.dataSource == nil  else {
+            return
+        }
+        
+
         let dataSource: DataSource<Content>
         if self.views.count > 50 {
             dataSource = DataSource(data: self.views[0...50].map{$0})
@@ -29,7 +44,7 @@ extension CollectionViewRepresentable {
         delegate.coordinator = context.coordinator
         
         context.coordinator.ownerSize = ownerSize
-        context.coordinator.inputData = self.views
+
         context.coordinator.dataSource = dataSource
         context.coordinator.prefetchDataSource = prefetchDataSource
         context.coordinator.delegate = delegate

@@ -12,8 +12,12 @@
 import SwiftUI
 
 final class PrefetchDataSource<Content: View>: NSObject, UICollectionViewDataSourcePrefetching {
-    weak var coordinator: Coordinator<Content>?
+    init(coordinator: Coordinator<Content>) {
+        self.coordinator = coordinator
+    }
     
+    weak var coordinator: Coordinator<Content>?
+
     func collectionView(
         _ collectionView: UICollectionView,
         prefetchItemsAt indexPaths: [IndexPath]) {

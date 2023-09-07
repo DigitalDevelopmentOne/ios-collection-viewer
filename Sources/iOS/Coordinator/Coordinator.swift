@@ -15,10 +15,13 @@ final class Coordinator<Content: View> {
     init(inputData: [() -> Content] = [], ownerSize: CGSize = .zero) {
         self.inputData = inputData
         self.ownerSize = ownerSize
+        self.isConfigured = false
     }
+    var isConfigured: Bool
     var inputData: [() -> Content]
     var ownerSize: CGSize
     var dataSource: DataSource<Content>?
     var delegate: Delegate<Content>?
     var prefetchDataSource: PrefetchDataSource<Content>?
+    weak var collectionLayout: UICollectionViewFlowLayout?
 }

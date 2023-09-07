@@ -12,8 +12,9 @@
 import SwiftUI
 
 final class DataSource<Content: View>: NSObject, UICollectionViewDataSource, Logging {
-    init(data: [() -> Content]) {
+    init(data: [() -> Content], coordinator: Coordinator<Content>) {
         self.data = data
+        self.coordinator = coordinator
     }
     var data: [() -> Content]
     weak var coordinator: Coordinator<Content>?

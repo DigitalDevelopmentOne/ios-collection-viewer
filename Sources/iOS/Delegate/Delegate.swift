@@ -17,8 +17,13 @@ final class Delegate<Content: View>:
     UICollectionViewDelegateFlowLayout,
     Logging {
     
+    init(coordinator: Coordinator<Content>) {
+        self.coordinator = coordinator
+        self.sizeStorage = [:]
+    }
+    
     weak var coordinator: Coordinator<Content>?
-    var sizeStorage: [Int: CGSize] = [:]
+    var sizeStorage: [Int: CGSize]
     
     func collectionView(
         _ collectionView: UICollectionView,

@@ -30,8 +30,12 @@ extension CollectionViewRepresentable {
             layout.itemSize = .init(width: 100, height: 100)
             layout.minimumLineSpacing = 2
             layout.minimumInteritemSpacing = 2
+            let visibleItems = uiCollection.indexPathsForVisibleItems
             DispatchQueue.main.async {
                 uiCollection.setCollectionViewLayout(layout, animated: true)
+                uiCollection.performBatchUpdates {
+                    uiCollection.reloadItems(at: visibleItems)
+                }
             }
         }
     }

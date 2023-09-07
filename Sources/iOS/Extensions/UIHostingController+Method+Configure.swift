@@ -13,10 +13,14 @@ import SwiftUI
 
 extension UIHostingController {
     @discardableResult
-    func configure(size: CGSize?) -> Self {
+    func configure(size: CGSize?) -> CGSize {
         let expectedSize = self.sizeThatFits(in: size ?? .zero)
         self.view.backgroundColor = .clear
         self.view.frame = .init(origin: .zero, size: expectedSize)
-        return self
+        return expectedSize
+    }
+    func configure(fixedSize: CGSize) {
+        self.view.backgroundColor = .clear
+        self.view.frame = .init(origin: .zero, size: fixedSize)
     }
 }

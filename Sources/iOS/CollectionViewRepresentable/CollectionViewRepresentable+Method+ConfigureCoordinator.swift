@@ -42,9 +42,8 @@ extension CollectionViewRepresentable {
         coordinator.prefetchDataSource = prefetchDataSource
         coordinator.delegate = delegate
         
-        coordinator.collectionLayout?.scrollDirection = .vertical
-        coordinator.collectionLayout?.minimumInteritemSpacing = 1
-        coordinator.collectionLayout?.minimumLineSpacing = 1
+        coordinator.collectionLayout?.scrollDirection = self.scrollDirection
+        coordinator.collectionLayout?.itemSize = .init(width: 1, height: 1)
         
         uiCollection.dataSource = dataSource
         uiCollection.delegate = delegate

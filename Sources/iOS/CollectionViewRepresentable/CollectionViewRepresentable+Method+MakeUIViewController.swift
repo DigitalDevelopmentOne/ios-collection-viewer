@@ -14,10 +14,7 @@ import SwiftUI
 extension CollectionViewRepresentable {
     func makeUIView(context: Context) -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 5
-        layout.minimumLineSpacing = 5
-        
+        context.coordinator.collectionLayout = layout
         return .init(frame: .init(origin: .zero, size: ownerSize), collectionViewLayout: layout)
     }
 }

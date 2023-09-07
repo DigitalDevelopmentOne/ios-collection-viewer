@@ -16,7 +16,7 @@ extension CollectionViewRepresentable {
 #if DEBUG //----------------------------------------------------------------------------------------
         self.debugMessage(#function, "Call")
 #endif //-------------------------------------------------------------------------------------------
-        self.configureCoordinator(uiView, context: context)
         self.updateCoordinator(uiView, context: context)
+        self.configureCoordinator(uiView, context: context)
     }
 }

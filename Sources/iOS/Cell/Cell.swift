@@ -17,7 +17,13 @@ final class Cell<Content: View>: UICollectionViewCell {
     func setView(view: () -> Content, size: CGSize?){
         let hosting = UIHostingController(rootView: view())
         hosting.configure(size: size)
-        setHosting(hosting: hosting)
+        self.setHosting(hosting: hosting)
+    }
+    
+    func setView(view: () -> Content, fixedSize size: CGSize){
+        let hosting = UIHostingController(rootView: view())
+        hosting.configure(fixedSize: size)
+        self.setHosting(hosting: hosting)
     }
     
     func setHosting(hosting: UIHostingController<Content>){

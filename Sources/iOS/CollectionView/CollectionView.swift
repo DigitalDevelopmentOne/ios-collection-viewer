@@ -16,9 +16,21 @@ public struct CollectionView<Collection: RandomAccessCollection, Content: View>:
         self.views = views
     }
     let views: [() -> Content]
+    var scrollDirection: UICollectionView.ScrollDirection = .vertical
+    
+    public func scrollDirection(_ value: UICollectionView.ScrollDirection) -> Self {
+        var view = self
+        view.scrollDirection = value
+        return view
+    }
+    
     public var body: some View {
         GeometryReader{
-            CollectionViewRepresentable<Content>(views: self.views, ownerSize: $0.size)
+            CollectionViewRepresentable<Content>(
+                views: self.views,
+                ownerSize: $0.size,
+                scrollDirection: self.scrollDirection
+            )
         }
     }
 }

@@ -25,7 +25,12 @@ extension DataSource{
             }
             
             let content = self.data[indexPath.item]
-            cell.setView(view: content, size: self.coordinator?.ownerSize)
+            if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout,
+               layout.itemSize != .init(width: 1, height: 1) {
+                cell.setView(view: content, fixedSize: layout.itemSize)
+            } else {
+                cell.setView(view: content, size: self.coordinator?.ownerSize)
+            }
             return cell
     }
 }

@@ -17,6 +17,13 @@ extension Delegate{
         _ collectionView: UICollectionView,
         _ collectionViewLayout: UICollectionViewLayout,
         _ indexPath: IndexPath) -> CGSize {
+            if let layout = collectionViewLayout as? UICollectionViewFlowLayout,
+               layout.itemSize != .init(width: 1, height: 1) {
+#if DEBUG //----------------------------------------------------------------------------------------
+                self.debugMessage(#function, "Fixed cell size defined. Size: \(layout.itemSize)")
+#endif //-------------------------------------------------------------------------------------------
+                return layout.itemSize
+            }
             if let size = self.sizeStorage[indexPath.item] {
 #if DEBUG //----------------------------------------------------------------------------------------
                 self.debugMessage(#function, "Size from storage: \(indexPath.item), size: \(size)")

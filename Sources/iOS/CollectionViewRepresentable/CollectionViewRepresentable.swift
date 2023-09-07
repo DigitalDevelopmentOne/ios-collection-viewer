@@ -15,4 +15,5 @@ struct CollectionViewRepresentable<Content: View>: UIViewRepresentable, Logging 
     let views: [() -> Content]
     let ownerSize: CGSize
     var scrollDirection: UICollectionView.ScrollDirection
+    var itemSize: CGSize?
 }

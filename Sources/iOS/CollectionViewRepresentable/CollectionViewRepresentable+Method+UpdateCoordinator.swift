@@ -16,25 +16,35 @@ extension CollectionViewRepresentable {
     func updateCoordinator(_ uiCollection: UICollectionView, context: Context) {
         if !context.coordinator.isConfigured { return }
         let coordinator = context.coordinator
-        if context.coordinator.inputData.count != self.views.count {
+        //if context.coordinator.inputData.count != self.views.count {
             if context.coordinator.inputData.count == context.coordinator.dataSource?.data.count {
                 context.coordinator.inputData = self.views
+                context.coordinator.dataSource?.updateData(newData: self.views)
                 context.coordinator.dataSource?.update(uiCollection)
             } else {
                 context.coordinator.inputData = self.views
+                context.coordinator.dataSource?.updateData(newData: self.views)
             }
-        }
+        //}
         if coordinator.collectionLayout?.scrollDirection != self.scrollDirection {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = self.scrollDirection
-            layout.itemSize = .init(width: 100, height: 100)
+            layout.itemSize = self.itemSize ?? .init(width: 1, height: 1)
             layout.minimumLineSpacing = 2
             layout.minimumInteritemSpacing = 2
-            let visibleItems = uiCollection.indexPathsForVisibleItems
+            
             DispatchQueue.main.async {
-                uiCollection.setCollectionViewLayout(layout, animated: true)
-                uiCollection.performBatchUpdates {
-                    uiCollection.reloadItems(at: visibleItems)
+                if layout.itemSize == coordinator.collectionLayout?.itemSize {
+                    uiCollection.setCollectionViewLayout(layout, animated: true)
+                    coordinator.collectionLayout = layout
+                    return
+                } else {
+                    uiCollection.setCollectionViewLayout(layout, animated: true)
+                    coordinator.collectionLayout = layout
+                    let visibleItems = uiCollection.indexPathsForVisibleItems
+                    uiCollection.performBatchUpdates {
+                        uiCollection.reloadItems(at: visibleItems)
+                    }
                 }
             }
         }

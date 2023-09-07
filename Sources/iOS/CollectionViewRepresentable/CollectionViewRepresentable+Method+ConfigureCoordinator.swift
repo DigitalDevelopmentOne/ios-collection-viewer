@@ -22,18 +22,10 @@ extension CollectionViewRepresentable {
         self.debugMessage(#function, "Performed")
 #endif //-------------------------------------------------------------------------------------------
         coordinator.inputData = self.views
-        let dataSource: DataSource<Content>
-        if self.views.count > 50 {
-            dataSource = DataSource(
-                data: self.views[0...50].map{$0},
-                coordinator: coordinator
-            )
-        } else {
-            dataSource = DataSource(
-                data: self.views,
-                coordinator: coordinator
-            )
-        }
+        let dataSource: DataSource<Content> = .init(
+            data: self.views,
+            coordinator: coordinator
+        )
         
         let prefetchDataSource = PrefetchDataSource<Content>(coordinator: coordinator)
         let delegate = Delegate<Content>(coordinator: coordinator)
@@ -43,7 +35,7 @@ extension CollectionViewRepresentable {
         coordinator.delegate = delegate
         
         coordinator.collectionLayout?.scrollDirection = self.scrollDirection
-        coordinator.collectionLayout?.itemSize = .init(width: 1, height: 1)
+        coordinator.collectionLayout?.itemSize = self.itemSize ?? .init(width: 1, height: 1)
         
         uiCollection.dataSource = dataSource
         uiCollection.delegate = delegate

@@ -17,10 +17,17 @@ public struct CollectionView<Collection: RandomAccessCollection, Content: View>:
     }
     let views: [() -> Content]
     var scrollDirection: UICollectionView.ScrollDirection = .vertical
+    var itemSize: CGSize?
     
     public func scrollDirection(_ value: UICollectionView.ScrollDirection) -> Self {
         var view = self
         view.scrollDirection = value
+        return view
+    }
+    
+    public func itemSize(_ value: CGSize?) -> Self {
+        var view = self
+        view.itemSize = value
         return view
     }
     
@@ -29,7 +36,8 @@ public struct CollectionView<Collection: RandomAccessCollection, Content: View>:
             CollectionViewRepresentable<Content>(
                 views: self.views,
                 ownerSize: $0.size,
-                scrollDirection: self.scrollDirection
+                scrollDirection: self.scrollDirection,
+                itemSize: self.itemSize
             )
         }
     }

@@ -23,7 +23,6 @@ final class DataSource<Content: View>: NSObject, UICollectionViewDataSource, Log
     var data: [() -> Content]
     weak var coordinator: Coordinator<Content>?
     
-    
     func updateData(newData:  [() -> Content]){
         if newData.count < self.data.count {
             return

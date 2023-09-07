@@ -20,13 +20,21 @@ extension Delegate{
             if let layout = collectionViewLayout as? UICollectionViewFlowLayout,
                layout.itemSize != .init(width: 1, height: 1) {
 #if DEBUG //----------------------------------------------------------------------------------------
-                self.debugMessage(#function, "Fixed cell size defined. Size: \(layout.itemSize)")
+                self.debugMessage(
+                    #function,
+                    "Fixed cell size defined. Size: \(layout.itemSize)",
+                    "Item: \(indexPath.item)"
+                )
 #endif //-------------------------------------------------------------------------------------------
                 return layout.itemSize
             }
             if let size = self.sizeStorage[indexPath.item] {
 #if DEBUG //----------------------------------------------------------------------------------------
-                self.debugMessage(#function, "Size from storage: \(indexPath.item), size: \(size)")
+                self.debugMessage(
+                    #function,
+                    "Size from storage. Size: \(size)",
+                    "Item: \(indexPath.item)"
+                )
 #endif //-------------------------------------------------------------------------------------------
                 return size
             }

@@ -19,19 +19,23 @@ extension Delegate{
         _ indexPath: IndexPath) -> CGSize {
             if let size = self.sizeStorage[indexPath.item] {
 #if DEBUG //----------------------------------------------------------------------------------------
-                self.debugMessage(#function, "Size from storage: \(indexPath.item)")
+                self.debugMessage(#function, "Size from storage: \(indexPath.item), size: \(size)")
 #endif //-------------------------------------------------------------------------------------------
                 return size
             }
-            guard let content = self.coordinator?.inputData[indexPath.item] else {
+            guard let coordinator, coordinator.inputData.count >= indexPath.item else {
+                self.warningMessage(#function, "Index out of range: \(indexPath.item)")
                 return .zero
             }
 #if DEBUG //----------------------------------------------------------------------------------------
             self.debugMessage(#function, "Size calculation: \(indexPath.item)")
 #endif //-------------------------------------------------------------------------------------------
-            let hosting = UIHostingController(rootView: content())
-            hosting.configure(size: self.coordinator?.ownerSize)
-            self.sizeStorage[indexPath.item] = hosting.view.frame.size
-            return hosting.view.frame.size
+            let hosting = UIHostingController(rootView: coordinator.inputData[indexPath.item]())
+            let size = hosting.configure(size: self.coordinator?.ownerSize)
+            self.sizeStorage[indexPath.item] = size
+#if DEBUG //----------------------------------------------------------------------------------------
+            self.debugMessage(#function, "Calculated: \(size)")
+#endif //-------------------------------------------------------------------------------------------
+            return size
         }
 }

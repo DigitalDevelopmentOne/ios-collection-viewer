@@ -27,6 +27,17 @@ public struct CollectionView<Collection: RandomAccessCollection, Content: View>:
                 configuration: self.configuration
             )
         }
+//        if views.isEmpty {
+//            EmptyView()
+//        } else {
+//            GeometryReader{
+//                CollectionViewRepresentable<Content>(
+//                    views: self.views,
+//                    ownerSize: $0.size,
+//                    configuration: self.configuration
+//                )
+//            }
+//        }
     }
 }
 

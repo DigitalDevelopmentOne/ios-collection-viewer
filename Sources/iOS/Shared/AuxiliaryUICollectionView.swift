@@ -14,4 +14,5 @@ import UIKit
 final class AuxiliaryUICollectionView: UICollectionView {
     var gridColumns: CGFloat?
     var sizeCaching: Bool = true
+    var refreshID: UUID? = nil
 }

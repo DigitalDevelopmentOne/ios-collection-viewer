@@ -43,9 +43,9 @@ extension CollectionView {
         return view
     }
     
-    public func refresAction(_ action: @escaping () -> ()) -> Self {
+    public func refresAction(_ action: @escaping (_ refresher: Refresher) -> ()) -> Self {
         var view = self
-        view.configuration.refresAction = .init(action: action)
+        view.configuration.refresher = Refresher(action: action, refreshControl: .init())
         return view
     }
     

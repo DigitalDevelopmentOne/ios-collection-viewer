@@ -20,7 +20,7 @@ struct CollectionConfiguration: Configuration {
     var itemSize: CGSize? = nil
     var scrollDirection: UICollectionView.ScrollDirection = .vertical
     var sizeCaching: Bool = true
-    var refresAction: RefresActionStorage? = nil
+    var refresher: Refresher? = nil
 
     init<T: Configuration>(from configuration: T) {
         self.gridColumns = configuration.gridColumns
@@ -29,6 +29,6 @@ struct CollectionConfiguration: Configuration {
         self.itemSize = configuration.itemSize
         self.scrollDirection = configuration.scrollDirection
         self.sizeCaching = configuration.sizeCaching
-        self.refresAction = configuration.refresAction
+        self.refresher = configuration.refresher
     }
 }

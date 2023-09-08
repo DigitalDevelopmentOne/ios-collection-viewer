@@ -12,7 +12,7 @@
 import SwiftUI
 
 extension CollectionViewRepresentable {
-    func updateUIView(_ uiView: UICollectionView, context: Context) {
+    func updateUIView(_ uiView: AuxiliaryUICollectionView, context: Context) {
 #if DEBUG //----------------------------------------------------------------------------------------
         self.debugMessage(#function, "Call")
 #endif //-------------------------------------------------------------------------------------------

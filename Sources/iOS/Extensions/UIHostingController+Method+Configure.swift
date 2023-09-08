@@ -23,4 +23,11 @@ extension UIHostingController {
         self.view.backgroundColor = .clear
         self.view.frame = .init(origin: .zero, size: fixedSize)
     }
+    func configure(size: CGSize?, width: CGFloat) -> CGSize {
+        let expectedSize = self.sizeThatFits(in: size ?? .zero)
+        let frame: CGRect = .init(x: 0, y: 0, width: width, height: expectedSize.height)
+        self.view.backgroundColor = .clear
+        self.view.frame = frame
+        return frame.size
+    }
 }

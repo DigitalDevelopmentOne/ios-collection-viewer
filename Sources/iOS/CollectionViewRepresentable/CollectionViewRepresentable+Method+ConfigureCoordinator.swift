@@ -13,7 +13,7 @@ import SwiftUI
 
 extension CollectionViewRepresentable {
     @inlinable
-    func configureCoordinator(_ uiCollection: UICollectionView, context: Context) {
+    func configureCoordinator(_ uiCollection: AuxiliaryUICollectionView, context: Context) {
         if context.coordinator.isConfigured || self.views.isEmpty { return }
         let coordinator = context.coordinator
         coordinator.isConfigured = true
@@ -34,6 +34,7 @@ extension CollectionViewRepresentable {
         coordinator.prefetchDataSource = prefetchDataSource
         coordinator.delegate = delegate
         
+        uiCollection.gridColumns = 2
         uiCollection.dataSource = dataSource
         uiCollection.delegate = delegate
         uiCollection.prefetchDataSource = prefetchDataSource

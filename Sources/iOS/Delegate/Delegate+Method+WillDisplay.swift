@@ -19,7 +19,7 @@ extension Delegate{
         _ indexPath: IndexPath
     ){
         if let count = self.coordinator?.dataSource?.data.count, indexPath.item > count - 20 {
-            self.coordinator?.dataSource?.update(collectionView)
+            self.coordinator?.dataSource?.loadingFromBuffer(collectionView)
         }
     }
 }

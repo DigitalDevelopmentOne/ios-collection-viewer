@@ -12,31 +12,13 @@
 import SwiftUI
 
 final class DataSource<Content: View>: NSObject, UICollectionViewDataSource, Logging {
-    init(data: [() -> Content], coordinator: Coordinator<Content>) {
-        if data.count > 50 {
-            self.data = data[0...50].map{$0}
-        } else {
-            self.data = data
-        }
+    init(data input: [() -> Content], coordinator: Coordinator<Content>) {
+        self.data = input.count > 50 ? input[0...50].map{$0} : input
         self.coordinator = coordinator
     }
     var data: [() -> Content]
     weak var coordinator: Coordinator<Content>?
-    
-    func updateData(newData:  [() -> Content]){
-        if self.data.isEmpty {
-            if data.count > 50 {
-                self.data = newData[0...50].map{$0}
-            } else {
-                self.data = newData
-            }
-        }
-        if newData.count < self.data.count {
-            return
-        }
-        self.data = newData[0...(self.data.count - 1)].map{$0}
-    }
-    
+        
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {

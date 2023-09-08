@@ -24,18 +24,16 @@ extension CollectionViewRepresentable {
         
         if self.views.isEmpty {
             coordinator.inputData = []
-            uiCollection.dataSource = nil
-            coordinator.dataSource?.data = []
-            uiCollection.dataSource = coordinator.dataSource
+            coordinator.dataSource?.removeAll(uiCollection)
         } else if coordinator.inputData.isEmpty {
             coordinator.inputData = self.views
             uiCollection.dataSource = nil
-            coordinator.dataSource?.updateData(newData: self.views)
+            coordinator.dataSource?.update(data: self.views)
             uiCollection.dataSource = coordinator.dataSource
         } else if coordinator.inputData.count == coordinator.dataSource?.data.count {
             coordinator.inputData = self.views
-            coordinator.dataSource?.updateData(newData: self.views)
-            coordinator.dataSource?.update(uiCollection)
+            coordinator.dataSource?.update(data: self.views)
+            coordinator.dataSource?.loadingFromBuffer(uiCollection)
         } else {
             coordinator.inputData = self.views
         }

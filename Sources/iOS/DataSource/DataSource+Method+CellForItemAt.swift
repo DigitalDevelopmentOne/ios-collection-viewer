@@ -34,9 +34,6 @@ extension DataSource{
             let content = self.data[indexPath.item]
             
             if layout.itemSize != .init(width: 1, height: 1) {
-#if DEBUG //----------------------------------------------------------------------------------------
-                //self.debugMessage(#function, "Set fixed size. Item: \(indexPath.item)")
-#endif //-------------------------------------------------------------------------------------------
                 cell.setView(view: content, fixedSize: layout.itemSize)
                 return cell
             }
@@ -52,9 +49,6 @@ extension DataSource{
                 ownerSize = self.coordinator?.ownerSize ?? .zero
             }
             
-#if DEBUG //----------------------------------------------------------------------------------------
-            //self.debugMessage(#function, "Set Calculated size. Item: \(indexPath.item)")
-#endif //-------------------------------------------------------------------------------------------
             cell.setView(view: content, size: ownerSize)
             
             return cell

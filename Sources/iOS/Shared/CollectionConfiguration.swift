@@ -17,4 +17,5 @@ struct CollectionConfiguration: Configuration {
     var minimumInteritemSpacing: CGFloat = 1
     var itemSize: CGSize? = nil
     var scrollDirection: UICollectionView.ScrollDirection = .vertical
+    var sizeCaching: Bool = true
 }

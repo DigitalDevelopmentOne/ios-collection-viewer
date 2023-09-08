@@ -32,7 +32,10 @@ extension CollectionViewRepresentable {
 #endif //-------------------------------------------------------------------------------------------
 
         let layout: UICollectionViewFlowLayout = .from(self.configuration)
+        
         uiCollection.gridColumns = self.configuration.gridColumns
+        uiCollection.sizeCaching = self.configuration.sizeCaching
+        
         DispatchQueue.main.async {
             if layout.itemSize == coordinator.collectionLayout?.itemSize {
                 uiCollection.setCollectionViewLayout(layout, animated: true)

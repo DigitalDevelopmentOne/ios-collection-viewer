@@ -17,4 +17,5 @@ public protocol Configuration: Equatable {
     var minimumInteritemSpacing: CGFloat { get set}
     var itemSize: CGSize? { get set }
     var scrollDirection: UICollectionView.ScrollDirection { get set }
+    var sizeCaching: Bool { get set }
 }

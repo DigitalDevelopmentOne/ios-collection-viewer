@@ -29,5 +29,11 @@ extension CollectionView {
         view.configuration.gridColumns = value
         return view
     }
+    
+    public func sizeCaching(_ value: Bool) -> Self {
+        var view = self
+        view.configuration.sizeCaching = value
+        return view
+    }
 }
 

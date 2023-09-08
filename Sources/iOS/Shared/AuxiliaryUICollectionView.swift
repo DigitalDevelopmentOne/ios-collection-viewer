@@ -13,6 +13,6 @@ import UIKit
 
 final class AuxiliaryUICollectionView: UICollectionView {
     var gridColumns: CGFloat?
+    var refresher: Refresher?
     var sizeCaching: Bool = true
-    var refreshID: UUID? = nil
 }

@@ -35,7 +35,7 @@ extension DataSource{
             
             if layout.itemSize != .init(width: 1, height: 1) {
 #if DEBUG //----------------------------------------------------------------------------------------
-                self.debugMessage(#function, "Set fixed size. Item: \(indexPath.item)")
+                //self.debugMessage(#function, "Set fixed size. Item: \(indexPath.item)")
 #endif //-------------------------------------------------------------------------------------------
                 cell.setView(view: content, fixedSize: layout.itemSize)
                 return cell
@@ -53,7 +53,7 @@ extension DataSource{
             }
             
 #if DEBUG //----------------------------------------------------------------------------------------
-            self.debugMessage(#function, "Set Calculated size. Item: \(indexPath.item)")
+            //self.debugMessage(#function, "Set Calculated size. Item: \(indexPath.item)")
 #endif //-------------------------------------------------------------------------------------------
             cell.setView(view: content, size: ownerSize)
             

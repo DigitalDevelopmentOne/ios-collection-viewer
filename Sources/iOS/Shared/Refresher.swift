@@ -15,11 +15,9 @@ public final class Refresher: NSObject {
     init(action: @escaping (_ refresher: Refresher) -> (), refreshControl: UIRefreshControl){
         self.value = action
         self.refreshControl = refreshControl
-        self.id = .init()
     }
     var refreshControl: UIRefreshControl
     var value: (_ refresher: Refresher) -> ()
-    let id: UUID
     @objc func action(_ refresher: Refresher){
         self.value(self)
     }

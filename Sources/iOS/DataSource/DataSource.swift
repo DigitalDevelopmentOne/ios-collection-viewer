@@ -24,6 +24,13 @@ final class DataSource<Content: View>: NSObject, UICollectionViewDataSource, Log
     weak var coordinator: Coordinator<Content>?
     
     func updateData(newData:  [() -> Content]){
+        if self.data.isEmpty {
+            if data.count > 50 {
+                self.data = newData[0...50].map{$0}
+            } else {
+                self.data = newData
+            }
+        }
         if newData.count < self.data.count {
             return
         }

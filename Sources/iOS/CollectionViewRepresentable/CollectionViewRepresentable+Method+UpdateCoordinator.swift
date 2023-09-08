@@ -22,21 +22,26 @@ extension CollectionViewRepresentable {
         }
         let coordinator = context.coordinator
         
-        if context.coordinator.inputData.count == context.coordinator.dataSource?.data.count {
-            context.coordinator.inputData = self.views
-            context.coordinator.dataSource?.updateData(newData: self.views)
-            context.coordinator.dataSource?.update(uiCollection)
+        if self.views.isEmpty {
+            coordinator.inputData = []
+            uiCollection.dataSource = nil
+            coordinator.dataSource?.data = []
+            uiCollection.dataSource = coordinator.dataSource
+        } else if coordinator.inputData.isEmpty {
+            coordinator.inputData = self.views
+            uiCollection.dataSource = nil
+            coordinator.dataSource?.updateData(newData: self.views)
+            uiCollection.dataSource = coordinator.dataSource
+        } else if coordinator.inputData.count == coordinator.dataSource?.data.count {
+            coordinator.inputData = self.views
+            coordinator.dataSource?.updateData(newData: self.views)
+            coordinator.dataSource?.update(uiCollection)
         } else {
-            context.coordinator.inputData = self.views
-            if self.views.isEmpty {
-                context.coordinator.dataSource?.data = []
-            } else {
-                context.coordinator.dataSource?.updateData(newData: self.views)
-            }
+            coordinator.inputData = self.views
         }
         
         if let refresher = self.configuration.refresher,
-           refresher.id != uiCollection.refreshID
+           uiCollection.refresher == nil
         {
 #if DEBUG //----------------------------------------------------------------------------------------
         self.debugMessage(#function, "Add Refresher")
@@ -46,7 +51,7 @@ extension CollectionViewRepresentable {
                 action: #selector(refresher.action),
                 for: .valueChanged
             )
-            uiCollection.refreshID = refresher.id
+            uiCollection.refresher = refresher
             uiCollection.alwaysBounceVertical = true
             uiCollection.addSubview(refresher.refreshControl)
         }

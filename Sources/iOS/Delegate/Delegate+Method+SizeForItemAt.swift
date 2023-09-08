@@ -24,11 +24,11 @@ extension Delegate{
             
             if layout.itemSize != .init(width: 1, height: 1) {
 #if DEBUG //----------------------------------------------------------------------------------------
-                self.debugMessage(
-                    #function,
-                    "Fixed cell size defined. Size: \(layout.itemSize)",
-                    "Item: \(indexPath.item)"
-                )
+//                self.debugMessage(
+//                    #function,
+//                    "Fixed cell size defined. Size: \(layout.itemSize)",
+//                    "Item: \(indexPath.item)"
+//                )
 #endif //-------------------------------------------------------------------------------------------
                 return layout.itemSize
             }
@@ -40,11 +40,11 @@ extension Delegate{
             
             if collection.sizeCaching, let size = self.sizeStorage[indexPath.item] {
 #if DEBUG //----------------------------------------------------------------------------------------
-                self.debugMessage(
-                    #function,
-                    "Size from storage. Size: \(size)",
-                    "Item: \(indexPath.item)"
-                )
+//                self.debugMessage(
+//                    #function,
+//                    "Size from storage. Size: \(size)",
+//                    "Item: \(indexPath.item)"
+//                )
 #endif //-------------------------------------------------------------------------------------------
                 return size
             }
@@ -57,9 +57,10 @@ extension Delegate{
             let hosting = UIHostingController(rootView: coordinator.inputData[indexPath.item]())
             
             let ownerSize: CGSize
+            let size: CGSize
             if let gridColumns = collection.gridColumns {
 #if DEBUG //----------------------------------------------------------------------------------------
-            self.debugMessage(#function, "Size calculation (fixed width): \(indexPath.item)")
+            //self.debugMessage(#function, "Size calculation (fixed width): \(indexPath.item)")
 #endif //-------------------------------------------------------------------------------------------
                 let spacing = layout.minimumInteritemSpacing * (gridColumns - 1)
                 let contentWidth = collection.frame.width - spacing
@@ -67,16 +68,21 @@ extension Delegate{
                     width: (contentWidth - spacing) / gridColumns,
                     height: self.coordinator?.ownerSize.height ?? 0
                 )
+                size = .init(
+                    width: ownerSize.width,
+                    height: hosting.configure(size: ownerSize).height
+                )
             } else {
 #if DEBUG //----------------------------------------------------------------------------------------
-            self.debugMessage(#function, "Size calculation: \(indexPath.item)")
+            //self.debugMessage(#function, "Size calculation: \(indexPath.item)")
 #endif //-------------------------------------------------------------------------------------------
                 ownerSize = self.coordinator?.ownerSize ?? .zero
+                size = hosting.configure(size: ownerSize)
             }
-            let size = hosting.configure(size: ownerSize)
+            //self.debugMessage(#function, "Owner size: \(ownerSize)")
             self.sizeStorage[indexPath.item] = size
 #if DEBUG //----------------------------------------------------------------------------------------
-            self.debugMessage(#function, "Calculated: \(size)")
+            //self.debugMessage(#function, "Calculated: \(size)")
 #endif //-------------------------------------------------------------------------------------------
             return size
         }

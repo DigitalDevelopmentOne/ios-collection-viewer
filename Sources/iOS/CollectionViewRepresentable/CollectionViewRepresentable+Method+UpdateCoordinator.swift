@@ -14,7 +14,12 @@ import SwiftUI
 extension CollectionViewRepresentable {
     @inlinable
     func updateCoordinator(_ uiCollection: AuxiliaryUICollectionView, context: Context) {
-        if !context.coordinator.isConfigured { return }
+        if !context.coordinator.isConfigured {
+#if DEBUG //----------------------------------------------------------------------------------------
+        self.debugMessage(#function, "Not configured")
+#endif //-------------------------------------------------------------------------------------------
+            return
+        }
         let coordinator = context.coordinator
         
         if context.coordinator.inputData.count == context.coordinator.dataSource?.data.count {
@@ -25,6 +30,15 @@ extension CollectionViewRepresentable {
             context.coordinator.inputData = self.views
             context.coordinator.dataSource?.updateData(newData: self.views)
         }
+        
+        
+        if let refresStorage = self.configuration.refresAction {
+            let refresher = UIRefreshControl()
+            refresher.addTarget(refresStorage, action: #selector(refresStorage.action), for: .valueChanged)
+            uiCollection.alwaysBounceVertical = true
+            uiCollection.addSubview(refresher)
+        }
+        
         
         if coordinator.collectionLayout == self.configuration { return }
 #if DEBUG //----------------------------------------------------------------------------------------

@@ -18,4 +18,19 @@ public protocol Configuration: Equatable {
     var itemSize: CGSize? { get set }
     var scrollDirection: UICollectionView.ScrollDirection { get set }
     var sizeCaching: Bool { get set }
+    var refresAction: RefresActionStorage? { get set }
+}
+
+public final class RefresActionStorage: NSObject {
+    override init(){
+        self.value = {}
+        super.init()
+    }
+    init(action: @escaping () -> ()){
+        self.value = action
+    }
+    var value: () -> ()
+    @objc func action(){
+        self.value()
+    }
 }

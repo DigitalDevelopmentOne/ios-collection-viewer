@@ -12,6 +12,7 @@
 import SwiftUI
 
 extension CollectionView {
+    
     public func scrollDirection(_ value: UICollectionView.ScrollDirection) -> Self {
         var view = self
         view.configuration.scrollDirection = value
@@ -35,5 +36,20 @@ extension CollectionView {
         view.configuration.sizeCaching = value
         return view
     }
+    
+    public func configuration<T: Configuration>(_ value: T) -> Self {
+        var view = self
+        view.configuration = .init(from: value)
+        return view
+    }
+    
+    public func refresAction(_ action: @escaping () -> ()) -> Self {
+        var view = self
+        view.configuration.refresAction = .init(action: action)
+        return view
+    }
+    
+    
+    
 }
 

@@ -14,13 +14,20 @@ import SwiftUI
 extension CollectionView {
     public func scrollDirection(_ value: UICollectionView.ScrollDirection) -> Self {
         var view = self
-        view.style.scrollDirection = value
+        view.configuration.scrollDirection = value
         return view
     }
     
     public func itemSize(_ value: CGSize?) -> Self {
         var view = self
-        view.style.itemSize = value
+        view.configuration.itemSize = value
+        return view
+    }
+    
+    public func gridColumns(_ value: CGFloat?) -> Self {
+        var view = self
+        view.configuration.gridColumns = value
         return view
     }
 }
+

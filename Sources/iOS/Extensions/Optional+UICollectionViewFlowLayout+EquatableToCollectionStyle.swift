@@ -12,7 +12,7 @@
 import UIKit
 
 extension Optional where Wrapped == UICollectionViewFlowLayout {
-    static func == (lhs: Self, rhs: CollectionStyle) -> Bool {
+    static func == (lhs: Self, rhs: CollectionConfiguration) -> Bool {
         switch lhs {
         case .none:
             return false

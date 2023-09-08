@@ -11,7 +11,7 @@
 
 import UIKit
 
-public extension Style {
+public extension Configuration {
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.minimumLineSpacing == rhs.minimumLineSpacing &&
         lhs.minimumInteritemSpacing == rhs.minimumInteritemSpacing &&

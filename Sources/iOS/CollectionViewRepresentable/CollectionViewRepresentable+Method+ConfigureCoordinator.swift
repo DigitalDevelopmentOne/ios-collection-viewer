@@ -34,7 +34,7 @@ extension CollectionViewRepresentable {
         coordinator.prefetchDataSource = prefetchDataSource
         coordinator.delegate = delegate
         
-        uiCollection.gridColumns = 1
+        uiCollection.gridColumns = self.configuration.gridColumns
         uiCollection.dataSource = dataSource
         uiCollection.delegate = delegate
         uiCollection.prefetchDataSource = prefetchDataSource

@@ -14,5 +14,5 @@ import SwiftUI
 struct CollectionViewRepresentable<Content: View>: UIViewRepresentable, Logging {
     let views: [() -> Content]
     let ownerSize: CGSize
-    var style: CollectionStyle
+    var configuration: CollectionConfiguration
 }

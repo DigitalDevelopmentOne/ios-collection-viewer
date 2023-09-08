@@ -1,7 +1,7 @@
 /*
  
  Project: CollectionViewer
- File: DefaultStyle.swift
+ File: CollectionConfiguration.swift
  Created by: Egor Boyko
  Date: 08.09.2023
  
@@ -11,7 +11,8 @@
 
 import UIKit
 
-struct CollectionStyle: Style {
+struct CollectionConfiguration: Configuration {
+    var gridColumns: CGFloat? = nil
     var minimumLineSpacing: CGFloat = 1
     var minimumInteritemSpacing: CGFloat = 1
     var itemSize: CGSize? = nil

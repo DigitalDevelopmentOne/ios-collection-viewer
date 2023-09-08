@@ -13,7 +13,7 @@ import SwiftUI
 
 extension CollectionViewRepresentable {
     func makeUIView(context: Context) -> AuxiliaryUICollectionView {
-        let layout: UICollectionViewFlowLayout = .from(self.style)
+        let layout: UICollectionViewFlowLayout = .from(self.configuration)
         context.coordinator.collectionLayout = layout
         return .init(frame: .init(origin: .zero, size: ownerSize), collectionViewLayout: layout)
     }

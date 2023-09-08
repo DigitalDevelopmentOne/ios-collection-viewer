@@ -13,7 +13,7 @@ import SwiftUI
 
 extension CollectionViewRepresentable {
     @inlinable
-    func updateCoordinator(_ uiCollection: UICollectionView, context: Context) {
+    func updateCoordinator(_ uiCollection: AuxiliaryUICollectionView, context: Context) {
         if !context.coordinator.isConfigured { return }
         let coordinator = context.coordinator
         
@@ -26,13 +26,13 @@ extension CollectionViewRepresentable {
             context.coordinator.dataSource?.updateData(newData: self.views)
         }
         
-        if coordinator.collectionLayout == self.style { return }
+        if coordinator.collectionLayout == self.configuration { return }
 #if DEBUG //----------------------------------------------------------------------------------------
         self.debugMessage(#function, "Changes")
 #endif //-------------------------------------------------------------------------------------------
 
-        let layout: UICollectionViewFlowLayout = .from(self.style)
-
+        let layout: UICollectionViewFlowLayout = .from(self.configuration)
+        uiCollection.gridColumns = self.configuration.gridColumns
         DispatchQueue.main.async {
             if layout.itemSize == coordinator.collectionLayout?.itemSize {
                 uiCollection.setCollectionViewLayout(layout, animated: true)

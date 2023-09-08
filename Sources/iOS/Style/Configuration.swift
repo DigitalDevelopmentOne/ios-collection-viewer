@@ -1,7 +1,7 @@
 /*
  
  Project: CollectionViewer
- File: Style.swift
+ File: Configuration.swift
  Created by: Egor Boyko
  Date: 08.09.2023
  
@@ -11,7 +11,8 @@
 
 import UIKit
 
-public protocol Style: Equatable {
+public protocol Configuration: Equatable {
+    var gridColumns: CGFloat? { get set }
     var minimumLineSpacing: CGFloat { get set }
     var minimumInteritemSpacing: CGFloat { get set}
     var itemSize: CGSize? { get set }

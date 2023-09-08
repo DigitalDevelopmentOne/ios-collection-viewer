@@ -12,7 +12,7 @@
 import UIKit
 
 extension UICollectionViewFlowLayout {
-    static func from(_ style: CollectionStyle) -> UICollectionViewFlowLayout {
+    static func from(_ style: CollectionConfiguration) -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = style.scrollDirection
         layout.itemSize = style.unwrappItemSize

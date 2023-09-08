@@ -12,7 +12,7 @@
 import UIKit
 
 extension UICollectionViewFlowLayout {
-    static func == (lhs: UICollectionViewFlowLayout, rhs: CollectionStyle) -> Bool {
+    static func == (lhs: UICollectionViewFlowLayout, rhs: CollectionConfiguration) -> Bool {
         lhs.minimumLineSpacing == rhs.minimumLineSpacing &&
         lhs.minimumInteritemSpacing == rhs.minimumInteritemSpacing &&
         lhs.itemSize == (rhs.itemSize ?? .init(width: 1, height: 1)) &&

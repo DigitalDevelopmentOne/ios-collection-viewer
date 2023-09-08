@@ -56,23 +56,24 @@ extension Delegate{
 
             let hosting = UIHostingController(rootView: coordinator.inputData[indexPath.item]())
             
-            let size: CGSize
+            let ownerSize: CGSize
             if let gridColumns = collection.gridColumns {
 #if DEBUG //----------------------------------------------------------------------------------------
             self.debugMessage(#function, "Size calculation (fixed width): \(indexPath.item)")
 #endif //-------------------------------------------------------------------------------------------
-                let spacing = layout.minimumLineSpacing * (gridColumns - 1)
+                let spacing = layout.minimumInteritemSpacing * (gridColumns - 1)
                 let contentWidth = collection.frame.width - spacing
-                size = hosting.configure(
-                    size: self.coordinator?.ownerSize,
-                    width: (contentWidth - spacing) / gridColumns
+                ownerSize = .init(
+                    width: (contentWidth - spacing) / gridColumns,
+                    height: self.coordinator?.ownerSize.height ?? 0
                 )
             } else {
 #if DEBUG //----------------------------------------------------------------------------------------
             self.debugMessage(#function, "Size calculation: \(indexPath.item)")
 #endif //-------------------------------------------------------------------------------------------
-                size = hosting.configure(size: self.coordinator?.ownerSize)
+                ownerSize = self.coordinator?.ownerSize ?? .zero
             }
+            let size = hosting.configure(size: ownerSize)
             self.sizeStorage[indexPath.item] = size
 #if DEBUG //----------------------------------------------------------------------------------------
             self.debugMessage(#function, "Calculated: \(size)")

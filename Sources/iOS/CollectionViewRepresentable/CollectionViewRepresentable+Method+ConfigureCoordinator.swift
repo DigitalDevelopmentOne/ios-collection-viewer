@@ -34,7 +34,7 @@ extension CollectionViewRepresentable {
         coordinator.prefetchDataSource = prefetchDataSource
         coordinator.delegate = delegate
         
-        uiCollection.gridColumns = 2
+        uiCollection.gridColumns = 1
         uiCollection.dataSource = dataSource
         uiCollection.delegate = delegate
         uiCollection.prefetchDataSource = prefetchDataSource
@@ -44,6 +44,5 @@ extension CollectionViewRepresentable {
         )
         uiCollection.decelerationRate = .init(rawValue: 0.9987)
         uiCollection.showsVerticalScrollIndicator = false
-  
     }
 }

@@ -23,20 +23,40 @@ extension DataSource{
                 ) as? Cell<Content> else {
                 fatalError("Cell Retrieval")
             }
+            guard let collection = collectionView as? AuxiliaryUICollectionView else {
+                fatalError("Must use AuxiliaryUICollectionView")
+            }
+            
+            guard let layout = collection.collectionViewLayout as? UICollectionViewFlowLayout else {
+                fatalError("Must use UICollectionViewFlowLayout")
+            }
             
             let content = self.data[indexPath.item]
-            if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout,
-               layout.itemSize != .init(width: 1, height: 1) {
+            
+            if layout.itemSize != .init(width: 1, height: 1) {
 #if DEBUG //----------------------------------------------------------------------------------------
                 self.debugMessage(#function, "Set fixed size. Item: \(indexPath.item)")
 #endif //-------------------------------------------------------------------------------------------
                 cell.setView(view: content, fixedSize: layout.itemSize)
-            } else {
-#if DEBUG //----------------------------------------------------------------------------------------
-                self.debugMessage(#function, "Set Calculated size. Item: \(indexPath.item)")
-#endif //-------------------------------------------------------------------------------------------
-                cell.setView(view: content, size: self.coordinator?.ownerSize)
+                return cell
             }
+            let ownerSize: CGSize
+            if let gridColumns = collection.gridColumns {
+                let spacing = layout.minimumLineSpacing * (gridColumns - 1)
+                let contentWidth = collection.frame.width - spacing
+                ownerSize = .init(
+                    width: (contentWidth - spacing) / gridColumns,
+                    height: self.coordinator?.ownerSize.height ?? 0
+                )
+            } else {
+                ownerSize = self.coordinator?.ownerSize ?? .zero
+            }
+            
+#if DEBUG //----------------------------------------------------------------------------------------
+            self.debugMessage(#function, "Set Calculated size. Item: \(indexPath.item)")
+#endif //-------------------------------------------------------------------------------------------
+            cell.setView(view: content, size: ownerSize)
+            
             return cell
         }
 }

@@ -1,7 +1,7 @@
 /*
  
  Project: CollectionViewer
- File: Style.swift
+ File: Configuration+Implementation.swift
  Created by: Egor Boyko
  Date: 08.09.2023
  

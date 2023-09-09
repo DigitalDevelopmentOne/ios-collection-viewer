@@ -13,12 +13,17 @@ import SwiftUI
 
 extension DataSource{
     func loadingAfterUpdate(_ collectionView: UICollectionView){
-        DispatchQueue.main.async {
-            let paths: [IndexPath] = (0..<self.data.count).map {
+        DispatchQueue.main.async { [weak self] in
+            guard let count = self?.data.count else {
+                return
+            }
+            let paths: [IndexPath] = (0..<count).map {
                 .init(row: $0, section: 0)
             }
-            collectionView.performBatchUpdates {
-                collectionView.insertItems(at: paths)
+            if self != nil {
+                collectionView.performBatchUpdates {
+                    collectionView.insertItems(at: paths)
+                }
             }
         }
     }

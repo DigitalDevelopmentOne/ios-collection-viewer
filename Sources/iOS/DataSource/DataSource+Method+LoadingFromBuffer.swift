@@ -13,14 +13,15 @@ import SwiftUI
 
 extension DataSource{
     func loadingFromBuffer(_ collectionView: UICollectionView){
-        DispatchQueue.main.async {
-            guard let coordinator = self.coordinator,
-                  coordinator.inputData.count > self.data.count else {
+        DispatchQueue.main.async { [weak self] in
+            guard let coordinator = self?.coordinator,
+                  let dataCount = self?.data.count,
+                  coordinator.inputData.count > dataCount else {
                 return
             }
             
             let lastInputDataIndex = coordinator.inputData.count - 1
-            let startIndex = self.data.count
+            let startIndex = dataCount
             let difference = (lastInputDataIndex - startIndex)
             let lastIndex = difference > 50 ? startIndex + 50 : lastInputDataIndex
             
@@ -28,15 +29,16 @@ extension DataSource{
             
             var paths = [IndexPath]()
             for item in 0..<newData.count {
-                let indexPath = IndexPath(row: item + self.data.count, section: 0)
+                let indexPath = IndexPath(row: item + dataCount, section: 0)
                 paths.append(indexPath)
             }
-            self.data.append(contentsOf: newData)
+            self?.data.append(contentsOf: newData)
             //We do not allow mutation of the collection if there are manyelements and the
             //element that causes the update is immediately visible
-            
-            collectionView.performBatchUpdates {
-                collectionView.insertItems(at: paths)
+            if self != nil {
+                collectionView.performBatchUpdates {
+                    collectionView.insertItems(at: paths)
+                }
             }
         }
     }

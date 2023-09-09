@@ -18,9 +18,6 @@ extension CollectionViewRepresentable {
         let coordinator = context.coordinator
         coordinator.isConfigured = true
         coordinator.ownerSize = self.ownerSize
-#if DEBUG //----------------------------------------------------------------------------------------
-        self.debugMessage(#function, "Performed")
-#endif //-------------------------------------------------------------------------------------------
         coordinator.inputData = self.views
         let dataSource: DataSource<Content> = .init(
             data: self.views,

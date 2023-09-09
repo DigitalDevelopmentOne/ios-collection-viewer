@@ -18,7 +18,6 @@ public struct CollectionView<Collection: RandomAccessCollection, Content: View>:
     }
     let views: [() -> Content]
     var configuration: CollectionConfiguration
-    
     public var body: some View {
         GeometryReader{
             CollectionViewRepresentable<Content>(
@@ -27,17 +26,7 @@ public struct CollectionView<Collection: RandomAccessCollection, Content: View>:
                 configuration: self.configuration
             )
         }
-//        if views.isEmpty {
-//            EmptyView()
-//        } else {
-//            GeometryReader{
-//                CollectionViewRepresentable<Content>(
-//                    views: self.views,
-//                    ownerSize: $0.size,
-//                    configuration: self.configuration
-//                )
-//            }
-//        }
+        .ignoresSafeArea()
     }
 }
 

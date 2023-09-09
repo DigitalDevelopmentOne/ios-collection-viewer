@@ -12,20 +12,20 @@
 import UIKit
 
 public final class Refresher: NSObject {
-    init(action: @escaping (_ refresher: Refresher) -> (), refreshControl: UIRefreshControl){
-        self.value = action
-        self.refreshControl = refreshControl
-    }
+    init(
+        action: @escaping (_ completed: @escaping ()->()) -> (),
+        refreshControl: UIRefreshControl){
+            self.value = action
+            self.refreshControl = refreshControl
+        }
     var refreshControl: UIRefreshControl
-    var value: (_ refresher: Refresher) -> ()
+    var value: (@escaping ()->()) -> ()
     @objc func action(_ refresher: Refresher){
-        self.value(self)
+        self.value{ [weak self] in
+            self?.completed()
+        }
     }
     public func completed(){
         self.refreshControl.endRefreshing()
-    }
-    
-    deinit {
-        print("Kill")
     }
 }

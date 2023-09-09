@@ -43,13 +43,11 @@ extension CollectionView {
         return view
     }
     
-    public func refresAction(_ action: @escaping (_ refresher: Refresher) -> ()) -> Self {
+    public func refreshAction(_ action: @escaping (_ completed: @escaping ()->()) -> ()) -> Self {
         var view = self
         view.configuration.refresher = Refresher(action: action, refreshControl: .init())
         return view
     }
-    
-    
     
 }
 

@@ -34,6 +34,7 @@ extension CollectionViewRepresentable {
         coordinator.prefetchDataSource = prefetchDataSource
         coordinator.delegate = delegate
         
+        uiCollection.backgroundColor = .clear
         uiCollection.dataSource = dataSource
         uiCollection.delegate = delegate
         uiCollection.prefetchDataSource = prefetchDataSource

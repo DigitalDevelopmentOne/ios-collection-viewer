@@ -15,9 +15,6 @@ extension CollectionViewRepresentable {
     @inlinable
     func updateCoordinator(_ uiCollection: AuxiliaryUICollectionView, context: Context) {
         if !context.coordinator.isConfigured {
-#if DEBUG //----------------------------------------------------------------------------------------
-        self.debugMessage(#function, "Not configured")
-#endif //-------------------------------------------------------------------------------------------
             return
         }
         let coordinator = context.coordinator
@@ -27,9 +24,8 @@ extension CollectionViewRepresentable {
             coordinator.dataSource?.removeAll(uiCollection)
         } else if coordinator.inputData.isEmpty {
             coordinator.inputData = self.views
-            uiCollection.dataSource = nil
             coordinator.dataSource?.update(data: self.views)
-            uiCollection.dataSource = coordinator.dataSource
+            coordinator.dataSource?.loadingAfterUpdate(uiCollection)
         } else if coordinator.inputData.count == coordinator.dataSource?.data.count {
             coordinator.inputData = self.views
             coordinator.dataSource?.update(data: self.views)
@@ -39,11 +35,7 @@ extension CollectionViewRepresentable {
         }
         
         if let refresher = self.configuration.refresher,
-           uiCollection.refresher == nil
-        {
-#if DEBUG //----------------------------------------------------------------------------------------
-        self.debugMessage(#function, "Add Refresher")
-#endif //-------------------------------------------------------------------------------------------
+           uiCollection.refresher == nil {
             refresher.refreshControl.addTarget(
                 refresher,
                 action: #selector(refresher.action),
@@ -56,14 +48,11 @@ extension CollectionViewRepresentable {
         
         uiCollection.gridColumns = self.configuration.gridColumns
         uiCollection.sizeCaching = self.configuration.sizeCaching
-         
+        
         if coordinator.collectionLayout == self.configuration { return }
-#if DEBUG //----------------------------------------------------------------------------------------
-        self.debugMessage(#function, "Changes")
-#endif //-------------------------------------------------------------------------------------------
 
         let layout: UICollectionViewFlowLayout = .from(self.configuration)
-    
+        
         DispatchQueue.main.async {
             if layout.itemSize == coordinator.collectionLayout?.itemSize {
                 uiCollection.setCollectionViewLayout(layout, animated: true)

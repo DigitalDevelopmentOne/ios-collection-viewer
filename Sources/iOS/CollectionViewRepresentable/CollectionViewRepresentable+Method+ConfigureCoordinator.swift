@@ -42,7 +42,7 @@ extension CollectionViewRepresentable {
             Cell<Content>.self,
             forCellWithReuseIdentifier: "\(Cell<Content>.self)"
         )
-        uiCollection.decelerationRate = .init(rawValue: 0.9987)
+        uiCollection.decelerationRate = .normal
         uiCollection.showsVerticalScrollIndicator = false
     }
 }
